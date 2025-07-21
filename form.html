@@ -6,119 +6,130 @@
     <title>Document</title>
     <style>
   /* Global background with antique feel */
-/* Clean, modern body background */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f7f8fa;
-  color: #333;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to right, #fff8f2, #f5eee6);
+    color: #3a2f2f;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* Card-like form container */
-#capsuleData {
-  background: #fff;
-  border-radius: 12px;
-  padding: 40px 30px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  width: 90%;
-  max-width: 540px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  transition: transform 0.3s ease;
-}
+  /* Frosted-glass antique form box */
+  #capsuleData {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 248, 240, 0.75);
+    border: 2px solid rgba(9, 146, 250, 0.3);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeInUp 1s ease-out;
+  }
 
-#capsuleData:hover {
-  transform: translateY(-2px);
-}
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-label {
-  font-weight: 600;
-  font-size: 15px;
-  margin-bottom: 5px;
-  color: #222;
-}
+  label {
+    font-weight: bold;
+    color: #5c3d2e;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
 
-input[type="text"],
-input[type="file"],
-input[type="date"],
-textarea {
-  padding: 12px 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fefefe;
-  transition: border-color 0.2s ease;
-}
+  input[type="text"],
+  input[type="file"],
+  input[type="date"],
+  textarea {
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #d6bfa9;
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.85);
+    transition: box-shadow 0.3s ease;
+  }
 
-input:focus,
-textarea:focus {
-  border-color: #4679f6;
-  outline: none;
-}
+  input:focus,
+  textarea:focus {
+    box-shadow: 0 0 0 2px #0981fa70;
+  }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
 
-button[type="submit"] {
-  background-color: #4679f6;
-  color: white;
-  border: none;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  button[type="submit"] {
+    background: #7da9d7;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(9, 109, 250, 0.4);
+  }
 
-button[type="submit"]:hover {
-  background-color: #305edb;
-}
+  button[type="submit"]:hover {
+    background-color: #1c7ce4;
+    box-shadow: 0 6px 16px rgba(9, 146, 250, 0.6);
+  }
 
-/* Spinner overlay */
-#spinner {
-  position: fixed;
-  display: none;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(250, 250, 250, 0.8);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
+  /* Spinner Styles */
+  #spinner {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px);
+  }
 
-/* Spinner style */
-.loader {
-  border: 6px solid #e0e0e0;
-  border-top: 6px solid #4679f6;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-}
+  .loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #0992fa;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
-h1 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
+  /* Optional: subtle glowing header */
+  h1 {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    color: #5c3d2e;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+  }
 </style>
 
 
@@ -169,7 +180,7 @@ const auth = getAuth();
 async function uploadToCloudinary(file) {
 
   const cloudName = "dk3qwx0db";
-const uploadPreset = "timeCapsulesData";
+const uploadPreset = "timecapsule";
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
 
   const formData = new FormData();

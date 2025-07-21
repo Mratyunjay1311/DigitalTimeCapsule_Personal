@@ -15,6 +15,15 @@
 
 ---
 
+## 🌐 Live Demo
+
+🚀 Try the live app here:  
+👉 **[personal-timecapsule-mmjs.netlify.app](https://personal-timecapsule-mmjs.netlify.app/)**
+
+No setup needed — just open and explore!
+
+
+
 ## 🗂 Project Overview
 
 Digital Time Capsule is a web app where users can:

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+  /* Global background with antique feel */
+/* Clean, modern body background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f8fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card-like form container */
+#capsuleData {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+#capsuleData:hover {
+  transform: translateY(-2px);
+}
+
+label {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="date"],
+textarea {
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fefefe;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4679f6;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button[type="submit"] {
+  background-color: #4679f6;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #305edb;
+}
+
+/* Spinner overlay */
+#spinner {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(250, 250, 250, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Spinner style */
+.loader {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #4679f6;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+</style>
+
+
+        
+</head>
+<body>
+    <form action="" id="capsuleData">
+        <label for="name">Name</label>
+<input type="text" id="name" >
+<label for="">Message</label>
+<textarea name="message" id="message"></textarea>
+<label for="file">Upload File</label>
+<input type="file" name="" id="file" multiple>
+
+ <label for="date">Select Date</label>
+
+<input type="date" name="date" id="date" min="">
+<button type="submit">Save</button>
+    </form>
+<div id="spinner">
+  <div class="loader"></div>
+</div>
+
+    
+</body> 
+</html>
+
+<script type="module">
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { db } from "./firebase-config.js";
+
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const auth = getAuth();
+ const spinner = document.getElementById('spinner')
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("date").setAttribute("min", today);
+  });
+
+
+    
+
+
+
+
+async function uploadToCloudinary(file) {
+
+  const cloudName = "dk3qwx0db";
+const uploadPreset = "timeCapsulesData";
+  const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", uploadPreset);
+
+  const res = await fetch(url, {
+    method: "POST",
+    body: formData
+  });
+
+ 
+
+  const data = await res.json();
+
+  if (!res.ok || data.error) {
+    throw new Error("Cloudinary Error: " + (data.error?.message || res.statusText));
+}
+  return data.secure_url; // this is the file URL
+}
+
+
+
+
+document.getElementById("capsuleData").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+const name = document.getElementById("name").value;
+const message = document.getElementById("message").value;
+const date = document.getElementById("date").value;
+ const files = document.getElementById("file").files;
+
+ if (!name || !message || !date || files.length === 0) {
+  alert("Please fill all fields and select at least one file.");
+  return;
+}
+
+
+ const selectedDateStr = date;
+const todayStr = new Date().toISOString().split("T")[0];
+
+if (selectedDateStr <= todayStr) {
+  alert("Please select a future date for unlocking the capsule.");
+  document.getElementById("capsuleData").reset();
+  return;
+}
+ spinner.style.display = "flex";
+  
+
+
+try{
+
+    if (!auth.currentUser) {
+          alert("You must be logged in to save your capsule.");
+          spinner.style.display = "none";
+          return;
+        }
+const uploadedURLs = [];
+for (let i = 0; i < files.length; i++) {
+  console.log("File to upload:", files[i]);
+
+  const url = await uploadToCloudinary(files[i]);
+  uploadedURLs.push(url);
+}
+
+
+const capsuleData = {
+  name,
+  message,
+  date,
+  files: uploadedURLs, 
+   userId: auth.currentUser.uid 
+};
+
+
+
+    
+    await setDoc(doc(db, "capsules", Date.now().toString()), capsuleData);
+
+  alert("Data saved successfully!");
+
+   document.getElementById("capsuleData").reset();
+      
+      window.location.href = 'capsulepage.html'
+
+} catch (error) {
+    alert("Failed to save data. Please try again.");
+
+}finally {
+  spinner.style.display = "none";
+}
+
+});
+
+
+
+ 
+
+</script>
+
+
+
+
+

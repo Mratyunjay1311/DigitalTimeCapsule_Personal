@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ChatGPT Image Jul 17, 2025, 07_28_29 PM.png" type="image/x-icon">
+    <title>PersonalTimeCapsule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Lilita+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,600;1,600&family=Sigmar&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lilita+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,600;1,600&family=Sigmar&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            width: 100%;
+            padding: 0 30px;
+             background-color: rgb(198, 74, 80);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+     
+
+        }
+          nav img {
+      height: 80px;                   
+    }
+
+  nav button {
+  padding: 10px 20px;          
+  font-size: 18px;           
+  background-color: #490f9f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 1.2; 
+  border-radius: 50px;       
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif    
+}
+    nav button:hover {
+      background-color: #34145b;
+    }
+    @media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  nav img {
+    height: 50px;
+  }
+
+  nav button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+#hero-section{
+    background-color: rgb(253, 235, 211);
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(52, 4, 93);
+      padding: 40px 20px; 
+      position: relative;
+  overflow: hidden;
+}
+#hero-section h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+   font-family: "Winky Rough", sans-serif;
+  font-optical-sizing: auto;
+ font-weight:800;
+  font-style: normal;
+}
+
+#hero-section h3 {
+     font-size: 1.2rem;
+  max-width: 600px;
+      font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  color: rgb(56, 59, 61);
+  font-style: normal;
+}
+#hero-section p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin-bottom: 30px;
+  margin: 0 auto 30px;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  color: rgb(41, 44, 46);
+  font-style: normal;
+}
+
+#hero-section button {
+  background-color: #dce30f;
+  color: rgb(33, 10, 83);
+  font-weight: bold;
+  padding: 15px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#hero-section button:hover {
+  background-color: #34145b;
+  color: aliceblue;
+}
+.hero-image {
+  margin-top: 30px;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+h2 > span{
+    position: relative;
+    display: inline-block;
+    color: rgb(195, 59, 232);
+    vertical-align: bottom;
+    overflow: hidden;
+    height: 1.25em;
+    margin-top: 20px;
+}
+h2>span>span{
+    display: block;
+    animation: anim 5s infinite ease;
+
+}
+
+      
+    
+@keyframes anim{
+    0% {
+transform: translateY(0%);
+    }
+    25% {
+        transform: translateY(-100%);
+    }
+    50%{
+        transform: translateY(-200%);
+    }
+    75%{
+        transform: translateY(-300%);
+    }
+    100%{
+        transform: translateY(-400%);
+    }
+
+
+
+}
+
+.box{
+    margin: 6rem 12 rem;
+    height: 20rem; height: 36rem;
+    background-size: 100% 100%;
+    box-shadow: 20px 20px 10px rgb(124, 46, 46);
+    animation: slider 10s linear infinite;
+}
+@keyframes slider
+{
+    0%{background-image: url("https://media.gettyimages.com/id/623550348/video/family-at-the-picnic-table-making-selfies.jpg?s=640x640&k=20&c=ptKOk9RwOh2nqP8pGSFq0S8MDfchfPdgz04wPiVFXxI=");}
+    25%{background-image: url("https://t3.ftcdn.net/jpg/11/95/60/98/360_F_1195609830_uSznysw55hsWCUpY7fuMTkI9W2VqDtQZ.jpg");}
+    50%{background-image: url('https://www.shutterstock.com/image-photo/happy-family-hug-laugh-on-260nw-2486702583.jpg');}
+    75%{background-image: url('https://www.shutterstock.com/image-photo/parents-child-portrait-selfie-home-260nw-2604141633.jpg');}
+    100%{background-image: url("https://www.shutterstock.com/image-photo/family-portrait-beach-selfie-children-260nw-2487290285.jpg");}
+}   
+
+#box{
+     display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+}
+.box {
+  width: 90%;
+  max-width: 1000px;
+  height: 500px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: slider 15s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .box {
+    height: 300px;
+  }
+
+  #hero-section h1 {
+    font-size: 2rem;
+  }
+
+  #hero-section h3, #hero-section p {
+    font-size: 1rem;
+  }
+}
+
+section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #fefefe;
+}
+
+h2 {
+  font-family: 'Lilita One', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #4c2e60;
+}
+
+/* How it Works */
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.step-card {
+  background: #fff7f1;
+  border-radius: 12px;
+  padding: 30px;
+  width: 200px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Benefits */
+#benefits ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: auto;
+}
+#benefits li {
+  margin: 12px 0;
+  font-size: 1.1rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Preview cards */
+.preview-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.preview-card {
+  background: #e8e8e8;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.locked-preview {
+  height: 120px;
+  background: #dcdcdc;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* Testimonials */
+.testimonial-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 600px;
+  margin: auto;
+}
+.testimonial-container blockquote {
+  background: #fff3f3;
+  padding: 20px;
+  border-left: 5px solid #ae4b70;
+  font-style: italic;
+  font-size: 1rem;
+}
+.testimonial-container span {
+  font-weight: bold;
+  color: #5a3c61;
+}
+
+/* CTA Section */
+#cta {
+  background-color: #fcf3e4;
+}
+#cta button {
+  background-color: #490f9f;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#cta button:hover {
+  background-color: #34145b;
+}
+
+/* Footer */
+footer {
+  background-color: #2d1d34;
+  color: #ddd;
+  padding: 40px 20px;
+  text-align: center;
+}
+.footer-links {
+  margin-bottom: 15px;
+}
+.footer-links a {
+  margin: 0 10px;
+  color: #ddd;
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-links a:hover {
+  color: #ffbd59;
+}
+.footer-socials span {
+  margin: 0 8px;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+    <div>
+        <nav>
+            <img src="ChatGPT Image Jul 17, 2025, 07_28_29 PM.png" alt="">
+
+            <button id="login" onclick="loginPage()">Login</button>
+            <button id="register" onclick="registerPage()">Register</button>
+        </nav>
+    </div>
+
+    <section id="hero-section">
+            <h1 >“Preserve Your Moments. For the Future You.”</h1>
+            <h3>Write today. Revisit it years later.</h3>
+
+            <p><p>Send a message to your future self. Store memories. Revisit time.</p></p>
+            <button id="createCapsule" onclick="newCapsule()">Create Your First Capsule</button>
+            <div>
+                <h2 style="color: rgb(74, 63, 80);">
+                    We Save Your
+                    <span>
+                        <span>Moments</span>
+                        <span>Stories</span>
+                        <span>Emotions</span>
+                        <span>Experiences</span>
+                        <span>Memories</span>
+                    </span>
+                </h2>
+            <img src="https://cupaloy.com/images/screenshot.png" alt="" class="hero-image">
+            </div>
+    </section>
+
+    <section id="box">
+        <div class="box">
+
+        </div>
+    </section>
+
+    <!-- Existing hero and slider remains -->
+
+<section id="how-it-works">
+  <h2>🔶 How It Works</h2>
+  <div class="steps-container">
+    <div class="step-card">
+      ✍️<p>Write your message</p>
+    </div>
+    <div class="step-card">
+      📸<p>Attach photos or voice</p>
+    </div>
+    <div class="step-card">
+      📆<p>Choose a future unlock date</p>
+    </div>
+    <div class="step-card">
+      🔐<p>It stays locked until that date!</p>
+    </div>
+  </div>
+</section>
+
+<section id="benefits">
+  <h2>🔶 What You’ll Get</h2>
+  <ul>
+    <li>🔒 Private & Secure digital storage</li>
+    <li>💌 Leave messages for your future self</li>
+    <li>🧠 Store thoughts, dreams, feelings</li>
+    <li>🗓 Unlock your own stories after 1, 3, or 10 years</li>
+    <li>🕰️ Digital diary + Emotional time travel</li>
+  </ul>
+</section>
+
+<section id="previews">
+  <h2>🔶 Preview Examples</h2>
+  <div class="preview-cards">
+    <div class="preview-card">
+      <div class="locked-preview">🔒</div>
+      <p>“A letter to my future self”</p>
+    </div>
+    <div class="preview-card">
+      <div class="locked-preview">🔒</div>
+      <p>“My birthday wish for 2030”</p>
+    </div>
+    <div class="preview-card">
+      <div class="locked-preview">🔒</div>
+      <p>“A memory I want to relive”</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <h2>🔶 What Users Say</h2>
+  <div class="testimonial-container">
+    <blockquote>
+      “I opened my 2021 letter today. I cried.”<br><span>- Ankit, Mumbai</span>
+    </blockquote>
+    <blockquote>
+      “I’m so glad I wrote to my 2020 self.”<br><span>- Priya, Bangalore</span>
+    </blockquote>
+  </div>
+</section>
+
+<section id="cta">
+  <h2>Ready to Start?</h2>
+  <button onclick="newCapsule()">Create My Time Capsule</button>
+  <p style="margin-top: 10px; font-size: 14px;">No signup required for guest version</p>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy</a>
+  </div>
+  <p>Made with 💜 by Mratyunjay</p>
+  <div class="footer-socials">
+    <span>🌐</span>
+    <span>📸</span>
+    <span>🐦</span>
+  </div>
+</footer>
+
+   
+     <script type="module" src="js/auth.js">
+  
+        
+     </script>
+     <script>
+      function newCapsule(){
+    window.location.href = 'capsulepage.html'
+  }
+
+  function loginPage(){
+    setTimeout(() => {
+      window.location.href = 'login.html'
+    }, 150);
+  }
+
+  function registerPage(){
+    setTimeout(() => {
+      window.location.href = 'auth.html'
+    }, 150);
+  }
+     </script>
+</body>
+</html>

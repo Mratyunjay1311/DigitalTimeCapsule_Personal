@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+      <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #f6f1e9 url('https://www.transparenttextures.com/patterns/french-stucco.png');
+      color: #2c2c2c;
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    nav {
+      background: #7b8d9d;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav img {
+      height: 50px;
+      border-radius: 8px;
+    }
+
+    nav button {
+      background-color: #3476d2;
+      color: #fffaf3;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    nav button:hover {
+      background-color: #3e2723;
+    }
+
+    #topSection {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    #createBtn {
+      background-color: #3476d2;
+      color: #fffaf3;
+      padding: 1rem 2.2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    #createBtn:hover {
+      background-color: #5d4037;
+      transform: scale(1.05);
+    }
+
+    #capsuleContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .capsuleCard {
+      background-color: #fffdf8;
+      width: 90%;
+      max-width: 600px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .capsuleCard:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+
+    .capsuleCard h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      color: #3e2723;
+    }
+
+    .capsuleCard p {
+      margin: 0.4rem 0;
+      color: #4a4a4a;
+    }
+
+    .capsuleCard img,
+    .capsuleCard video {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+
+    .capsuleCard a {
+      display: inline-block;
+      margin-top: 12px;
+      color: #1a73e8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .capsuleCard a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      #createBtn {
+        width: 90%;
+      }
+
+      .capsuleCard {
+        padding: 1rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+    <nav>
+        <img src="./ChatGPT Image Jul 17, 2025, 07_28_29 PM.png" alt="logo">
+       <button class="createCapsule" onclick="formPage()">Create New Capsule</button>
+        <button>Log Out</button>
+    </nav>
+    <section id="topSection">
+   <button class="createCapsule" id="createBtn" onclick="formPage()">Create new Capsule</button>
+    </section>
+
+    <main id="capsuleContainer">
+    
+    </main>
+</body>
+</html>
+
+<script type="module">
+
+  
+
+import { auth, db } from "./firebase-config.js";
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import {
+  collection,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const container = document.getElementById("capsuleContainer");
+
+
+// 👇 Wait for auth state to know who's logged in
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const uid = user.uid;
+
+    const q = query(
+      collection(db, "capsules"),
+      where("userId", "==", uid)
+    );
+
+    try {
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        container.innerHTML += `<p style="margin-top:2rem;font-size:1.2rem;">No capsules created yet.</p>`;
+        return;
+      }
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const card = document.createElement("div");
+        card.className = 'capsuleCard'
+        card.style.cssText = `
+          margin: 20px;
+          padding: 20px;
+          background: #ffffffdd;
+          border-radius: 12px;
+          box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+          max-width: 500px;
+          width: 100%;
+        `;
+
+        const todayStr = new Date().toISOString().split("T")[0];
+const unlockDate = new Date(data.date);
+const today = new Date();
+const isLocked = unlockDate > today;
+
+
+        const status = isLocked
+          ? `🔒 Locked until ${data.date}`
+          : `📬 Ready to open!`;
+
+
+           let mediaContent = "";
+       if (!isLocked) {
+              mediaContent = (data.files||[]).map((url) => {
+                const ext = url.split(".").pop().toLowerCase();
+                if (["jpg", "jpeg", "png", "gif"].includes(ext)) {
+                  return `<img src="${url}" style="max-width:100%;margin-top:10px;border-radius:8px;" />`;
+                } else if (["mp4", "webm"].includes(ext)) {
+                  return `<video src="${url}" controls style="max-width:100%;margin-top:10px;border-radius:8px;"></video>`;
+                } else {
+                  return `<a href="${url}" target="_blank" style="display:block;margin-top:10px;">View file</a>`;
+                }
+              }).join("");
+            } else {
+              mediaContent = `<p style="font-style: italic; margin-top: 10px; color: #999;">Media will be visible on ${data.date}.</p>`;
+            }
+
+            card.innerHTML = `
+              <h3>${data.name}</h3>
+              <p><strong>Message:</strong> ${data.message}</p>
+              <p><strong>Unlock Date:</strong> ${data.date}</p>
+              <p><strong>Status:</strong> ${status}</p>
+              ${mediaContent}
+            `;
+
+        container.appendChild(card);
+      });
+
+    } catch (err) {
+      console.error("Error fetching capsules:", err);
+      container.innerHTML += `<p>Error loading capsules. Try again.</p>`;
+    }
+  } else {
+    window.location.href = "login.html";
+  }
+});
+</script>
+<script>
+      function formPage() {
+  window.location.href = "form.html";
+}
+</script>

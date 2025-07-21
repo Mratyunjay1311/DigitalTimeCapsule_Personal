@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Capsule</title>
+</head>
+<body>
+  <h2 id="status">Loading...</h2>
+  <div id="capsuleData"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      // 🔐 your config here (copy from firebase-config.js)
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const params = new URLSearchParams(window.location.search);
+    const linkId = params.get("link");
+
+    if (!linkId) {
+      document.getElementById("status").innerText = "Invalid or missing link.";
+    } else {
+      const linkSnap = await getDoc(doc(db, "sharedLinks", linkId));
+
+      if (!linkSnap.exists()) {
+        document.getElementById("status").innerText = "Link not found.";
+      } else {
+        const data = linkSnap.data();
+        const now = Date.now();
+        const unlockTime = new Date(data.unlockDate).getTime();
+
+        if (now < unlockTime) {
+          document.getElementById("status").innerText = "⏳ Capsule not yet unlocked.";
+        } else if (now > data.expiry) {
+          document.getElementById("status").innerText = "⛔ This link has expired.";
+        } else {
+          // Valid: fetch actual capsule
+          const capsuleSnap = await getDoc(doc(db, "capsules", data.capsuleId));
+          if (!capsuleSnap.exists()) {
+            document.getElementById("status").innerText = "Capsule not found.";
+          } else {
+            const capsule = capsuleSnap.data();
+            document.getElementById("status").innerText = `✅ Capsule: ${capsule.name}`;
+            document.getElementById("capsuleData").innerHTML = `
+              <p><strong>Message:</strong> ${capsule.message}</p>
+              <p><strong>Unlock Date:</strong> ${capsule.date}</p>
+              ${(capsule.files || []).map((url) => {
+                const ext = url.split(".").pop();
+                return ext === "mp4"
+                  ? `<video src="${url}" controls width="300"></video>`
+                  : `<img src="${url}" width="300"/>`;
+              }).join("<br/>")}
+            `;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

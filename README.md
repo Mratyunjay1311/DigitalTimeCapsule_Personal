@@ -23,7 +23,7 @@
 No setup needed — just open and explore!
 
 
-g
+
 ## 🗂 Project Overview
 
 Digital Time Capsule is a web app where users can:
@@ -35,21 +35,7 @@ Digital Time Capsule is a web app where users can:
 
 The idea is to create a private space for you to talk to your future self.
 
----
 
-## 📸 UI Highlights
-
-### 🔮 Welcome Section
-> Encourages users to start writing immediately for their future selves.
-
-![Landing Screenshot](./46499918-a851-4a68-86d7-ac04eb531453.png)
-
----
-
-### 📭 Capsule Management Page
-> View and create capsules after logging in.
-
-![Capsule Page Screenshot](./471889e0-ad8b-4433-a2a6-72915853996e.png)
 
 ---
 

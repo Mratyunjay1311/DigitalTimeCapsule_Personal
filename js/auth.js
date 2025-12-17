@@ -85,7 +85,7 @@ function isStrongPassword(password) {
       
        try {
         await firebaseSignOut(auth);
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       } catch (error) {
         alert("Logout failed: " + error.message);
       }

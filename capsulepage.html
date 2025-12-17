@@ -153,7 +153,8 @@
     <nav>
         <img src="./ChatGPT Image Jul 17, 2025, 07_28_29 PM.png" alt="logo">
        <button class="createCapsule" onclick="formPage()">Create New Capsule</button>
-        <button>Log Out</button>
+        <button id="logoutBtn">Log Out</button>
+
     </nav>
     <section id="topSection">
    <button class="createCapsule" id="createBtn" onclick="formPage()">Create new Capsule</button>
@@ -179,6 +180,9 @@ import {
   where,
   getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+import { signOut } from 
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 const container = document.getElementById("capsuleContainer");
 
@@ -260,6 +264,18 @@ const isLocked = unlockDate > today;
     window.location.href = "login.html";
   }
 });
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    window.location.href = "login.html";
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+});
+
 </script>
 <script>
       function formPage() {
